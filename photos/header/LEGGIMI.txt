@@ -1,0 +1,24 @@
+FOTO HEADER SEZIONI
+===================
+
+Queste foto appaiono come sfondo del titolo grande (hero)
+quando si entra in una sezione del sito.
+
+COME SOSTITUIRE UNA FOTO
+  1. Prepara la tua foto (formato JPG, dimensioni consigliate: 1600×900 px o più grande)
+  2. Rinominala esattamente come il file che vuoi sostituire
+  3. Copiala in questa cartella (sovrascrivendo quella vecchia)
+
+ELENCO FILE E A QUALE SEZIONE CORRISPONDONO
+  coach.jpg       → sezione "I Coach"
+  crossfit.jpg    → sezione "CrossFit"
+  hyrox.jpg       → sezione "Hyrox"
+  gente.jpg       → sezione "Arena Fam"
+  arena.jpg       → sezione "L'Arena"
+  personal.jpg    → sezione "Personal Training"
+  prezzi.jpg      → sezione "Prezzi"
+
+SUGGERIMENTO
+  Preferisci foto orizzontali (landscape) o quadrate, scure e ad alto contrasto,
+  perché sopra ci va il testo bianco in grande.
+  Dopo aver sostituito una foto, ricarica la pagina nel browser per vederla.

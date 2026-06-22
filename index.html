@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARENA97 — Hyrox · CrossFit · Milano</title>
+  <meta name="description" content="Arena97 — palestra urbana a Milano: Hyrox e CrossFit. Coach veri, community reale, Via Benaco 1.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=46">
+  <link rel="icon" type="image/png" href="assets/mark.png?v=14">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="duotoneVolt" color-interpolation-filters="sRGB">
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.04 0.55 1"/>
+        <feFuncG type="table" tableValues="0.02 0.04 0.12"/>
+        <feFuncB type="table" tableValues="0.02 0.03 0.08"/>
+      </feComponentTransfer>
+    </filter>
+    <!-- Effetto spray/stencil per il logo sopra le foto -->
+    <filter id="spray" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="3" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.2 1.1" result="grainA"/>
+      <feComposite in="disp" in2="grainA" operator="in"/>
+    </filter>
+    <!-- Spray rosso: usato al hover sulle card discipline -->
+    <filter id="sprayRed" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="3" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.2 1.1" result="grainA"/>
+      <feComposite in="disp" in2="grainA" operator="in" result="shape"/>
+      <feFlood flood-color="#fe0000" flood-opacity="1" result="red"/>
+      <feComposite in="red" in2="shape" operator="in"/>
+    </filter>
+    <!-- Pattern a pois per le frecce halftone -->
+    <pattern id="dots" width="2.5" height="2.5" patternUnits="userSpaceOnUse">
+      <circle cx="0.85" cy="0.85" r="0.85" fill="#fe0000"/>
+    </pattern>
+  </svg>
+
+  <!-- ══════════════ NAV ══════════════ -->
+  <header class="nav" id="nav">
+    <a class="nav__side mono" href="mailto:staff@arena97.it?subject=Prova%20Arena97">Prova</a>
+    <a class="nav__logo" href="#" id="navLogo" aria-label="Arena97 — home">
+      <img class="nav__logo-img" src="assets/logo.png?v=14" alt="Arena97" onerror="this.parentElement.classList.add('no-img'); this.remove()">
+      <span class="nav__logo-fallback" aria-hidden="true">
+        <img class="nav__logo-mark" src="assets/mark.png?v=14" alt="">
+        <span class="nav__logo-word">ARENA97</span>
+      </span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Apri menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ══════════════ MENU DOGPOUND ══════════════ -->
+  <div class="menu" id="menu" hidden>
+    <button class="menu__close" id="menuClose" aria-label="Chiudi menu">✕</button>
+
+    <!-- Foto alternata sinistra/destra per ogni voce di menu (crossfade A/B) -->
+    <div class="menu__photo" id="menuPhoto" aria-hidden="true">
+      <img class="menu__photo__frame" id="menuPhotoA" src="" alt="">
+      <img class="menu__photo__frame" id="menuPhotoB" src="" alt="">
+      <div class="menu__photo-veil"></div>
+    </div>
+
+    <nav class="menu__links" aria-label="Menu principale">
+      <!-- ✏️ MODIFICA: foto menu hamburger → sostituisci i file in photos/menu/ -->
+      <a href="#" data-view="coach"   data-photo="photos/menu/coach.jpg"      data-side="right">
+        <span class="menu__num mono">01</span>I Coach
+      </a>
+      <div class="menu__group">
+        <span class="menu__group-title" data-photo="photos/menu/discipline.jpg" data-side="left">
+          <span class="menu__num mono">02</span>Classi
+        </span>
+        <div class="menu__sub">
+          <a href="#" data-view="crossfit" data-photo="photos/menu/crossfit.jpg" data-side="left">CrossFit</a>
+          <span class="menu__sub-sep" aria-hidden="true">·</span>
+          <a href="#" data-view="hyrox"    data-photo="photos/menu/hyrox.jpg"    data-side="left">Hyrox</a>
+        </div>
+      </div>
+      <a href="#" data-view="gente"    data-photo="photos/menu/gente.jpg"      data-side="right">
+        <span class="menu__num mono">03</span>Arena Fam
+      </a>
+      <a href="#" data-view="arena"    data-photo="photos/menu/arena.jpg"      data-side="left">
+        <span class="menu__num mono">04</span>L'Arena
+      </a>
+      <a href="#" data-view="personal" data-photo="photos/menu/personal.jpg"   data-side="right">
+        <span class="menu__num mono">05</span>Personal Training
+      </a>
+      <a href="#" data-view="merch"    data-photo="photos/menu/merch.jpg"      data-side="left">
+        <span class="menu__num mono">06</span>Merch
+      </a>
+      <a href="#" data-view="prezzi"   data-photo="photos/menu/prezzi.jpg"     data-side="right">
+        <span class="menu__num mono">07</span>Prezzi
+      </a>
+    </nav>
+
+    <p class="menu__foot mono">Arena97 — Via Benaco 1 · 20139 Milano · Est. MMXXI</p>
+  </div>
+
+  <!-- ══════════════ HOME (landing) ══════════════ -->
+  <main id="home">
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" id="heroBg" aria-hidden="true"></div>
+      <div class="hero__veil" aria-hidden="true"></div>
+      <div class="hero__grain2" aria-hidden="true"></div>
+
+      <div class="hero__head">
+        <p class="hero__eyebrow">Studio Portraits — Vol. 01 / MMXXVI</p>
+        <p class="hero__eyebrow hero__eyebrow--r">Urban Hybrid Club</p>
+      </div>
+
+      <div class="hero__bottom">
+        <!-- ✏️ MODIFICA: titolo grande della home (tre parole chiave) -->
+        <h1 class="hero__claim">Dedication. Workout.<br><span class="u-volt">Discipline.</span></h1>
+        <!-- ✏️ MODIFICA: testo descrittivo sotto il titolo -->
+        <p class="hero__lead">
+          Hyrox e CrossFit a Milano. Allenamenti guidati da coach veri,
+          classi dense, progressi misurabili e una community che entra in sala
+          per lavorare sul serio.
+        </p>
+
+        <div class="hero__strip">
+          <div class="hero__cell hero__cell--logo">
+            <img class="hero__hex" src="assets/mark.png?v=14" alt="" aria-hidden="true">
+            <span class="hero__cell-txt">Hyrox<br>CrossFit</span>
+          </div>
+          <div class="hero__cell"><span class="hero__cell-txt">Arena 97<br>Training Club</span></div>
+          <div class="hero__cell hero__cell--arrow" aria-hidden="true">
+            <span class="darrow"></span>
+          </div>
+          <div class="hero__cell"><span class="hero__cell-txt"><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4786c6a88c20a46f:0x57cba59d25af5c0a?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">Via Benaco, 1<br>20139 Milano MI</a></span></div>
+          <div class="hero__cell hero__cell--brand">
+            <img class="hero__brand" src="assets/logo.png?v=14" alt="Arena97">
+          </div>
+        </div>
+
+        <div class="hero__ctas">
+          <a class="btn btn--volt" href="mailto:staff@arena97.it?subject=Prova%20Arena97">Prenota una prova</a>
+          <a class="btn btn--ghost" href="#" data-view="coach">Conosci i coach</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick proof -->
+    <section class="quick-proof" aria-label="Cosa trovi in Arena97">
+      <a class="quick-proof__item reveal" href="#" data-view="hyrox">
+        <span class="quick-proof__num">01</span>
+        <strong>Hyrox race prep</strong>
+        <em>Stazioni, pacing e simulazioni gara.</em>
+      </a>
+      <a class="quick-proof__item reveal" href="#" data-view="coach">
+        <span class="quick-proof__num">02</span>
+        <strong>Coach in sala</strong>
+        <em>Tecnica, standard e progressi tracciati.</em>
+      </a>
+      <a class="quick-proof__item reveal" href="#" data-view="arena">
+        <span class="quick-proof__num">03</span>
+        <strong>Scalo Porta Romana</strong>
+        <em>Area sled, rig e box CrossFit.</em>
+      </a>
+    </section>
+
+    <div class="marquee marquee--volt" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Hyrox</span><i>✦</i><span>CrossFit</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Hyrox</span><i>✦</i><span>CrossFit</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Hyrox</span><i>✦</i><span>CrossFit</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Hyrox</span><i>✦</i><span>CrossFit</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Hyrox</span><i>✦</i><span>CrossFit</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Hyrox</span><i>✦</i><span>CrossFit</span><i>✦</i><span>Milano</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- 01 — Manifesto -->
+    <section class="manifesto" id="manifesto">
+      <div class="section-head reveal">
+        <span class="section-head__num mono">01</span>
+        <h2 class="section-head__title">Manifesto</h2>
+        <span class="section-head__meta mono">Studio · Vol. 01 · MMXXVI</span>
+      </div>
+      <!-- ✏️ MODIFICA: frase principale del manifesto -->
+      <p class="manifesto__statement reveal">
+        ARENA97 Training Club: una sala, <em>due discipline</em>,
+        un'unica ossessione — <span class="u-volt">allenarti sul serio.</span>
+      </p>
+      <div class="manifesto__grid">
+        <!-- ✏️ MODIFICA: testo lungo del manifesto -->
+        <p class="manifesto__copy reveal">
+          Nata allo Scalo Porta Romana di Milano, Arena97 è la palestra dove
+          <strong>Hyrox e CrossFit</strong> vivono sotto lo stesso tetto.
+          Niente macchine isolate e cuffie alle orecchie: qui si entra per
+          lavorare, guidati da coach veri, dentro una community che spinge.
+          Classi dense, standard alti, progressi misurati uno per uno —
+          dalla prima prova al tuo record personale.
+        </p>
+        <ul class="manifesto__stats reveal">
+          <li><strong>3</strong><span class="mono">Discipline</span></li>
+          <li><strong>06</strong><span class="mono">Coach</span></li>
+          <li><strong>'21</strong><span class="mono">Dal 2021</span></li>
+          <li><strong>MI</strong><span class="mono">Scalo Porta Romana</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 02 — Discipline (3 flip card) -->
+    <section class="disciplines" id="discipline">
+      <div class="section-head reveal">
+        <span class="section-head__num mono">02</span>
+        <h2 class="section-head__title">Classi</h2>
+        <span class="section-head__meta mono">CrossFit · Hyrox</span>
+      </div>
+      <div class="disc-grid">
+
+        <div class="disc-card reveal" role="button" tabindex="0" data-view="crossfit" aria-label="Vai alla sezione CrossFit">
+          <div class="disc-card__bg" style="background-image:url('photos/francesca/01.jpg')"></div>
+          <div class="disc-card__veil"></div>
+          <img class="disc-card__spray" src="assets/mark.png?v=14" alt="" aria-hidden="true">
+          <div class="disc-card__body">
+            <span class="disc-card__num mono">01</span>
+            <h3 class="disc-card__name">CrossFit</h3>
+            <p class="disc-card__words">Forza<br>WOD<br>Community</p>
+            <span class="disc-card__go mono">Scopri <svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></span>
+          </div>
+        </div>
+
+        <div class="disc-card reveal" role="button" tabindex="0" data-view="hyrox" aria-label="Vai alla sezione Hyrox">
+          <div class="disc-card__bg" style="background-image:url('photos/erik/01.jpg')"></div>
+          <div class="disc-card__veil"></div>
+          <img class="disc-card__spray" src="assets/mark.png?v=14" alt="" aria-hidden="true">
+          <div class="disc-card__body">
+            <span class="disc-card__num mono">02</span>
+            <h3 class="disc-card__name">Hyrox</h3>
+            <p class="disc-card__words">Pacing<br>Sled<br>Finish line</p>
+            <span class="disc-card__go mono">Scopri <svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></span>
+          </div>
+        </div>
+
+        <!-- ✏️ MODIFICA: card invito alla prova gratuita -->
+        <a class="disc-card disc-card--cta reveal" href="#prenota" aria-label="Prenota la tua prima prova gratuita">
+          <img class="disc-card__spray" src="assets/mark.png?v=14" alt="" aria-hidden="true">
+          <div class="disc-card__body">
+            <span class="disc-card__num mono">03</span>
+            <span class="disc-card__cta-eyebrow mono">Nuovo qui?</span>
+            <h3 class="disc-card__name">Prima<br>prova</h3>
+            <p class="disc-card__words">Gratis<br>Nessun vincolo</p>
+            <span class="disc-card__go mono">Prenota ora <svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 03 — I Founder -->
+    <section class="founders" id="fondatori">
+      <div class="section-head reveal">
+        <span class="section-head__num mono">03</span>
+        <h2 class="section-head__title">I Founder</h2>
+        <span class="section-head__meta mono">Padre &amp; Figlio · Rossetti</span>
+      </div>
+      <div class="founders__grid">
+        <figure class="founders__media reveal">
+          <img src="photos/fondatori/01.jpg" alt="Paolo e Luca Rossetti, fondatori Arena97" loading="lazy" onerror="this.remove()">
+        </figure>
+        <div class="founders__text">
+          <h3 class="founders__title reveal">Padre<br>&amp; <span class="founders__title-outline">Figlio.</span></h3>
+          <p class="founders__copy reveal">
+            Arena97 nasce da loro: <strong>Paolo</strong> e <strong>Luca
+            Rossetti</strong>, entrambi co-founder, proprietari e head coach.
+            Due generazioni in sala, la stessa idea fissa — l'allenamento
+            fatto bene, senza scorciatoie. Paolo firma la visione e la
+            programmazione; Luca porta il passo della nuova scuola,
+            tra race pace e hybrid training.
+          </p>
+          <ul class="founders__roles reveal">
+            <li><strong>Paolo Rossetti</strong><span class="mono">Co-Founder · Head Coach</span></li>
+            <li><strong>Luca Rossetti</strong><span class="mono">Co-Founder · Head Coach</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee marquee--dark" aria-hidden="true">
+      <div class="marquee__track marquee__track--reverse">
+        <span>Arena97</span><i>✦</i><span>Est. 2021</span><i>✦</i><span>Scalo Porta Romana</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Arena97</span><i>✦</i><span>Est. 2021</span><i>✦</i><span>Scalo Porta Romana</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Arena97</span><i>✦</i><span>Est. 2021</span><i>✦</i><span>Scalo Porta Romana</span><i>✦</i><span>Milano</span><i>✦</i>
+        <span>Arena97</span><i>✦</i><span>Est. 2021</span><i>✦</i><span>Scalo Porta Romana</span><i>✦</i><span>Milano</span><i>✦</i>
+      </div>
+    </div>
+
+    <footer class="footer" id="contatti">
+      <div class="contact reveal" id="prenota">
+        <div class="contact__media" aria-hidden="true">
+          <div class="contact__media-img" style="background-image:url('photos/arena/02.jpg')"></div>
+          <div class="contact__media-veil"></div>
+        </div>
+
+        <div class="contact__panel">
+          <p class="mono contact__kicker">Vieni a conoscerli dal vivo</p>
+          <h2 class="contact__title">Allenati<br>con <span class="u-volt">loro.</span></h2>
+          <p class="contact__sub">Prenota la tua <strong>prova gratuita</strong>: lasciaci i tuoi dati e
+            scegli fino a 3 momenti. Allo slot ci pensiamo noi — ti ricontattiamo per la conferma.</p>
+
+          <form id="bookingForm" novalidate>
+            <div class="booking__grid">
+              <div class="field">
+                <label class="field__label mono" for="bkFirst">Nome *</label>
+                <input class="field__input" id="bkFirst" type="text" placeholder="Mario" autocomplete="given-name" required>
+              </div>
+              <div class="field">
+                <label class="field__label mono" for="bkLast">Cognome *</label>
+                <input class="field__input" id="bkLast" type="text" placeholder="Rossi" autocomplete="family-name" required>
+              </div>
+              <div class="field">
+                <label class="field__label mono" for="bkEmail">Email *</label>
+                <input class="field__input" id="bkEmail" type="email" placeholder="mario@email.it" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label class="field__label mono" for="bkPhone">Telefono</label>
+                <input class="field__input" id="bkPhone" type="tel" placeholder="+39 333 1234567" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="field__label mono">Disciplina d'interesse</span>
+              <div class="chips" id="bkDisc">
+                <button type="button" class="chip" data-val="Hyrox">Hyrox</button>
+                <button type="button" class="chip" data-val="CrossFit">CrossFit</button>
+                <button type="button" class="chip" data-val="Personal Training">Personal</button>
+                <button type="button" class="chip" data-val="Da decidere">Da decidere</button>
+              </div>
+            </div>
+
+            <fieldset class="booking__slots">
+              <legend class="field__label mono">Quando vorresti provare? Fino a 3 slot · almeno 1 *</legend>
+              <div class="slot">
+                <span class="slot__num mono">01</span>
+                <button type="button" class="field__input bk-datebtn" data-slot="0" aria-haspopup="dialog">
+                  <span class="bk-datebtn__txt">Scegli la data</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 2v3M17 2v3M3.5 8.5h17M5 5h14a1.5 1.5 0 0 1 1.5 1.5V20A1.5 1.5 0 0 1 19 21.5H5A1.5 1.5 0 0 1 3.5 20V6.5A1.5 1.5 0 0 1 5 5Z"/></svg>
+                </button>
+                <input type="hidden" class="slot__date">
+                <select class="field__input slot__band" aria-label="Fascia oraria slot 1">
+                  <option value="">Fascia oraria…</option>
+                  <option>Mattina · 7:00–12:00</option>
+                  <option>Pausa pranzo · 12:00–15:00</option>
+                  <option>Pomeriggio · 15:00–19:00</option>
+                  <option>Sera · 19:00–21:00</option>
+                </select>
+              </div>
+              <div class="slot">
+                <span class="slot__num mono">02</span>
+                <button type="button" class="field__input bk-datebtn" data-slot="1" aria-haspopup="dialog">
+                  <span class="bk-datebtn__txt">Scegli la data</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 2v3M17 2v3M3.5 8.5h17M5 5h14a1.5 1.5 0 0 1 1.5 1.5V20A1.5 1.5 0 0 1 19 21.5H5A1.5 1.5 0 0 1 3.5 20V6.5A1.5 1.5 0 0 1 5 5Z"/></svg>
+                </button>
+                <input type="hidden" class="slot__date">
+                <select class="field__input slot__band" aria-label="Fascia oraria slot 2">
+                  <option value="">Fascia oraria…</option>
+                  <option>Mattina · 7:00–12:00</option>
+                  <option>Pausa pranzo · 12:00–15:00</option>
+                  <option>Pomeriggio · 15:00–19:00</option>
+                  <option>Sera · 19:00–21:00</option>
+                </select>
+              </div>
+              <div class="slot">
+                <span class="slot__num mono">03</span>
+                <button type="button" class="field__input bk-datebtn" data-slot="2" aria-haspopup="dialog">
+                  <span class="bk-datebtn__txt">Scegli la data</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 2v3M17 2v3M3.5 8.5h17M5 5h14a1.5 1.5 0 0 1 1.5 1.5V20A1.5 1.5 0 0 1 19 21.5H5A1.5 1.5 0 0 1 3.5 20V6.5A1.5 1.5 0 0 1 5 5Z"/></svg>
+                </button>
+                <input type="hidden" class="slot__date">
+                <select class="field__input slot__band" aria-label="Fascia oraria slot 3">
+                  <option value="">Fascia oraria…</option>
+                  <option>Mattina · 7:00–12:00</option>
+                  <option>Pausa pranzo · 12:00–15:00</option>
+                  <option>Pomeriggio · 15:00–19:00</option>
+                  <option>Sera · 19:00–21:00</option>
+                </select>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label class="field__label mono" for="bkNote">Note (facoltativo)</label>
+              <textarea class="field__input" id="bkNote" rows="2" placeholder="Esperienza, obiettivi, infortuni da segnalare…"></textarea>
+            </div>
+
+            <label class="bk-consent">
+              <input type="checkbox" id="bkConsent">
+              <span>Acconsento al trattamento dei miei dati per essere ricontattato da Arena97 ai fini della prenotazione.</span>
+            </label>
+
+            <div class="booking__foot">
+              <button class="btn btn--volt btn--big" type="submit" id="bkSubmit">Prenota la prova</button>
+              <p class="booking__msg mono" id="bookingMsg" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer__meta">
+        <div class="footer__col">
+          <h4 class="mono">Dove</h4>
+          <p><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4786c6a88c20a46f:0x57cba59d25af5c0a?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">Via Benaco, 1</a><br>20139 Milano MI</p>
+        </div>
+        <div class="footer__col">
+          <h4 class="mono">Contatti</h4>
+          <p><a href="mailto:staff@arena97.it">staff@arena97.it</a><br><a href="tel:+393294952946">+39 329 495 2946</a></p>
+        </div>
+        <div class="footer__col">
+          <h4 class="mono">Social</h4>
+          <p><a href="#" rel="noopener">Instagram</a><br><a href="#" rel="noopener">TikTok</a></p>
+        </div>
+        <div class="footer__col">
+          <h4 class="mono">Orari</h4>
+          <p>Lun – Ven · 7:00 – 21:00<br>Sab · 10:00 – 14:00<br>Dom · Chiuso</p>
+        </div>
+      </div>
+      <div class="footer__giant" aria-hidden="true">
+        <img class="footer__giant-img" src="assets/logo.png?v=14" alt="Arena97"
+             onerror="this.parentElement.textContent='ARENA97'">
+      </div>
+      <p class="footer__legal mono">© MMXXVI Arena97 SSD — Milano · Via Benaco 1 · Sito non affiliato ad alcun marchio terzo</p>
+    </footer>
+
+  </main><!-- /home -->
+
+  <!-- ══════════════ SECTION VIEWS ══════════════ -->
+
+  <!-- VIEW: I Coach -->
+  <div class="view" id="view-coach" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione Coach → sostituisci photos/header/coach.jpg -->
+      <div class="view-hero__bg" id="vbCoach" style="background-image:url('photos/header/coach.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back aria-label="Torna alla home"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">I Coach</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <!-- master-detail: lista sinistra + pannello destra -->
+    <div class="coaches-md">
+      <div class="coaches-md__list" id="coachList"></div>
+      <div class="coaches-md__panel" id="coachPanel"></div>
+    </div>
+  </div>
+
+  <!-- VIEW: CrossFit -->
+  <div class="view view--disc" id="view-crossfit" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione CrossFit → sostituisci photos/header/crossfit.jpg -->
+      <div class="view-hero__bg" id="vbCrossfit" style="background-image:url('photos/header/crossfit.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back aria-label="Torna alla home"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">CrossFit</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <div class="disc-split">
+      <div class="disc-split__text reveal">
+        <div class="disc-split__eyebrow">
+          <span class="mono">02</span>
+          <span class="mono">WOD &amp; Forza</span>
+        </div>
+        <h2 class="disc-split__title">CrossFit</h2>
+        <p class="disc-split__copy">
+          Il CrossFit in Arena97 è WOD quotidiani programmati, sessioni di
+          forza dedicate e una community che spinge. Classi per tutti i livelli
+          con scaling, open box negli orari liberi e coach che conoscono il
+          tuo nome — e il tuo deadlift.
+        </p>
+        <p class="disc-split__copy">
+          Lavoro funzionale, varianza costante, progressi misurabili.
+          Dalla prima classe al PR: il percorso è tracciato.
+        </p>
+        <ul class="disc-split__feats">
+          <li>Classi illimitate</li>
+          <li>WOD quotidiani programmati</li>
+          <li>Sessioni di forza dedicate</li>
+          <li>Open box negli orari liberi</li>
+          <li>Scaling per ogni livello · da € 109/mese</li>
+        </ul>
+        <div class="disc-split__actions">
+          <a class="btn btn--volt" href="mailto:staff@arena97.it?subject=Prova%20CrossFit">Prenota una prova gratuita</a>
+          <a class="btn btn--ghost" href="#" data-view="prezzi">Vedi i prezzi <svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></a>
+        </div>
+      </div>
+      <div class="disc-split__photo reveal" id="dpCrossfit">
+        <div class="disc-split__slide is-active" style="background-image:url('photos/crossfit/01.jpg')"></div>
+        <div class="disc-split__slide" style="background-image:url('photos/crossfit/02.jpg')"></div>
+        <div class="disc-split__slide" style="background-image:url('photos/crossfit/03.jpg')"></div>
+        <div class="disc-split__dots">
+          <span class="is-active"></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ MODIFICA: spiegazione CrossFit (schede interattive: obiettivi · per chi · esercizi) -->
+    <section class="disc-guide" data-guide>
+      <div class="disc-guide__bp" aria-hidden="true">
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--tl">Strength × Metcon</span>
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--tr">Vol. 02 / CrossFit</span>
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--bl">Scale · Tutti i livelli</span>
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--br">WOD · Daily</span>
+        <svg class="disc-guide__bp-lines" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none">
+          <line x1="44" y1="0" x2="100" y2="62"/>
+          <line x1="66" y1="0" x2="100" y2="38"/>
+          <line x1="86" y1="0" x2="100" y2="16"/>
+        </svg>
+      </div>
+      <div class="disc-guide__inner">
+        <header class="disc-guide__head reveal">
+          <span class="disc-guide__kicker mono">Capire il CrossFit</span>
+          <h2 class="disc-guide__title">È fatto per <span class="u-volt">te?</span></h2>
+          <p class="disc-guide__lead">
+            Allenamento funzionale ad alta intensità che mescola sollevamento pesi,
+            ginnastica e cardio. Ogni giorno un WOD diverso: niente noia, mai due
+            allenamenti uguali. <strong>Tocca una scheda</strong> per scoprire se fa per te.
+          </p>
+        </header>
+
+        <div class="disc-guide__tabs reveal" role="tablist">
+          <button type="button" class="disc-guide__tab is-active" data-guide-tab="0" role="tab" aria-selected="true">
+            <span class="disc-guide__tab-num mono">01</span>
+            <span class="disc-guide__tab-label">Obiettivi</span>
+          </button>
+          <button type="button" class="disc-guide__tab" data-guide-tab="1" role="tab" aria-selected="false">
+            <span class="disc-guide__tab-num mono">02</span>
+            <span class="disc-guide__tab-label">Per chi è</span>
+          </button>
+          <button type="button" class="disc-guide__tab" data-guide-tab="2" role="tab" aria-selected="false">
+            <span class="disc-guide__tab-num mono">03</span>
+            <span class="disc-guide__tab-label">Esercizi</span>
+          </button>
+        </div>
+
+        <div class="disc-guide__stage reveal">
+          <div class="disc-guide__pane is-active" data-guide-pane="0">
+            <p class="disc-guide__pane-intro">Cosa porti a casa allenandoti sul serio.</p>
+            <ul class="disc-guide__list">
+              <li><span class="disc-guide__li-k">Forza &amp; potenza</span><span class="disc-guide__li-d">Numeri che salgono su squat, stacco e distensioni.</span></li>
+              <li><span class="disc-guide__li-k">Condizionamento</span><span class="disc-guide__li-d">Capacità di lavoro: reggi più a lungo, recuperi prima.</span></li>
+              <li><span class="disc-guide__li-k">Ricomposizione</span><span class="disc-guide__li-d">Più muscolo, meno grasso, corpo più atletico.</span></li>
+              <li><span class="disc-guide__li-k">Motore</span><span class="disc-guide__li-d">Resistenza muscolare e cardio nello stesso allenamento.</span></li>
+            </ul>
+          </div>
+          <div class="disc-guide__pane" data-guide-pane="1">
+            <p class="disc-guide__pane-intro">Se ti ritrovi qui, la classe è tua.</p>
+            <ul class="disc-guide__list">
+              <li><span class="disc-guide__li-k">Cerchi varietà</span><span class="disc-guide__li-d">Mai due allenamenti uguali, una community che spinge.</span></li>
+              <li><span class="disc-guide__li-k">Ti annoi in sala pesi</span><span class="disc-guide__li-d">Basta macchine isolate e cuffie alle orecchie.</span></li>
+              <li><span class="disc-guide__li-k">Qualsiasi livello</span><span class="disc-guide__li-d">Dal primo giorno all'atleta: tutto si scala su di te.</span></li>
+              <li><span class="disc-guide__li-k">Vuoi misurare</span><span class="disc-guide__li-d">Progressi tracciati, dal primo WOD al record personale.</span></li>
+            </ul>
+          </div>
+          <div class="disc-guide__pane" data-guide-pane="2">
+            <p class="disc-guide__pane-intro">Cosa fai davvero in un'ora di box.</p>
+            <ul class="disc-guide__list">
+              <li><span class="disc-guide__li-k">Pesistica</span><span class="disc-guide__li-d">Squat, stacchi, distensioni, strappo &amp; slancio.</span></li>
+              <li><span class="disc-guide__li-k">Ginnastica</span><span class="disc-guide__li-d">Trazioni, dip, muscle-up, verticali.</span></li>
+              <li><span class="disc-guide__li-k">Metabolici</span><span class="disc-guide__li-d">Corsa, vogatore, box jump, burpees.</span></li>
+              <li><span class="disc-guide__li-k">WOD</span><span class="disc-guide__li-d">A tempo o a round, sempre scalabili.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <a class="btn btn--volt disc-guide__cta reveal" href="mailto:staff@arena97.it?subject=Prova%20CrossFit">Prova il CrossFit</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- VIEW: Hyrox -->
+  <div class="view view--disc" id="view-hyrox" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione Hyrox → sostituisci photos/header/hyrox.jpg -->
+      <div class="view-hero__bg" id="vbHyrox" style="background-image:url('photos/header/hyrox.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back aria-label="Torna alla home"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">Hyrox</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <div class="disc-split">
+      <div class="disc-split__text reveal">
+        <div class="disc-split__eyebrow">
+          <span class="mono">03</span>
+          <span class="mono">Fitness Racing</span>
+        </div>
+        <h2 class="disc-split__title">Hyrox</h2>
+        <p class="disc-split__copy">
+          La gara di fitness più diffusa al mondo: 8 km di corsa divisi in otto tratti
+          da 1 km, ognuno seguito da una stazione di workout funzionale.
+          Indoor, cronometrata, stesso formato in ogni città del pianeta — il tuo
+          tempo a Milano vale quanto quello di New York.
+        </p>
+        <p class="disc-split__copy">
+          In Arena97 la preparazione la firmano i coach Hyrox del team.
+          Una data sul calendario, un percorso noto, un tempo da battere.
+          Non serve essere atleti — serve iniziare.
+        </p>
+        <ul class="disc-split__feats">
+          <li>Classi illimitate</li>
+          <li>Simulazioni di gara cronometrate</li>
+          <li>Programmazione race &amp; pacing</li>
+          <li>Coach Hyrox dedicati</li>
+          <li>Accesso a CrossFit · da € 119/mese</li>
+        </ul>
+        <div class="disc-split__actions">
+          <a class="btn btn--volt" href="mailto:staff@arena97.it?subject=Prova%20Hyrox%20Arena97">Vieni a provarlo</a>
+          <a class="btn btn--ghost" href="#" data-view="coach">I coach Hyrox <svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></a>
+        </div>
+      </div>
+      <div class="disc-split__photo reveal" id="dpHyrox">
+        <div class="disc-split__slide is-active" style="background-image:url('photos/hyrox/01.jpg')"></div>
+        <div class="disc-split__slide" style="background-image:url('photos/hyrox/02.jpg')"></div>
+        <div class="disc-split__slide" style="background-image:url('photos/hyrox/03.jpg')"></div>
+        <div class="disc-split__dots">
+          <span class="is-active"></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ MODIFICA: spiegazione Hyrox (schede interattive: obiettivi · per chi · esercizi) -->
+    <section class="disc-guide" data-guide>
+      <div class="disc-guide__bp" aria-hidden="true">
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--tl">8 × 1 KM</span>
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--tr">Vol. 03 / Hyrox</span>
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--bl">8 Stazioni funzionali</span>
+        <span class="disc-guide__bp-tag disc-guide__bp-tag--br">Race · Timed</span>
+        <svg class="disc-guide__bp-lines" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none">
+          <line x1="44" y1="0" x2="100" y2="62"/>
+          <line x1="66" y1="0" x2="100" y2="38"/>
+          <line x1="86" y1="0" x2="100" y2="16"/>
+        </svg>
+      </div>
+      <div class="disc-guide__inner">
+        <header class="disc-guide__head reveal">
+          <span class="disc-guide__kicker mono">Capire l'Hyrox</span>
+          <h2 class="disc-guide__title">È fatto per <span class="u-volt">te?</span></h2>
+          <p class="disc-guide__lead">
+            Una gara indoor a formato fisso: 8 km di corsa alternati a 8 stazioni
+            di lavoro funzionale. Lo stesso percorso in tutto il mondo — un test
+            di resistenza ibrida. <strong>Tocca una scheda</strong> per scoprire se fa per te.
+          </p>
+        </header>
+
+        <div class="disc-guide__tabs reveal" role="tablist">
+          <button type="button" class="disc-guide__tab is-active" data-guide-tab="0" role="tab" aria-selected="true">
+            <span class="disc-guide__tab-num mono">01</span>
+            <span class="disc-guide__tab-label">Obiettivi</span>
+          </button>
+          <button type="button" class="disc-guide__tab" data-guide-tab="1" role="tab" aria-selected="false">
+            <span class="disc-guide__tab-num mono">02</span>
+            <span class="disc-guide__tab-label">Per chi è</span>
+          </button>
+          <button type="button" class="disc-guide__tab" data-guide-tab="2" role="tab" aria-selected="false">
+            <span class="disc-guide__tab-num mono">03</span>
+            <span class="disc-guide__tab-label">Esercizi</span>
+          </button>
+        </div>
+
+        <div class="disc-guide__stage reveal">
+          <div class="disc-guide__pane is-active" data-guide-pane="0">
+            <p class="disc-guide__pane-intro">Cosa alleni puntando alla finish line.</p>
+            <ul class="disc-guide__list">
+              <li><span class="disc-guide__li-k">Resistenza ibrida</span><span class="disc-guide__li-d">Motore aerobico e forza nello stesso test.</span></li>
+              <li><span class="disc-guide__li-k">Pacing</span><span class="disc-guide__li-d">Tenere il ritmo giusto sotto fatica, senza esplodere.</span></li>
+              <li><span class="disc-guide__li-k">Obiettivo gara</span><span class="disc-guide__li-d">Una data sul calendario, un tempo da preparare.</span></li>
+              <li><span class="disc-guide__li-k">Progressione</span><span class="disc-guide__li-d">Migliori il tuo tempo, gara dopo gara.</span></li>
+            </ul>
+          </div>
+          <div class="disc-guide__pane" data-guide-pane="1">
+            <p class="disc-guide__pane-intro">Se ti riconosci qui, l'Hyrox fa per te.</p>
+            <ul class="disc-guide__list">
+              <li><span class="disc-guide__li-k">Ami correre</span><span class="disc-guide__li-d">…ma vuoi aggiungere anche forza vera.</span></li>
+              <li><span class="disc-guide__li-k">Vuoi una meta</span><span class="disc-guide__li-d">Un obiettivo misurabile, non solo "allenarsi".</span></li>
+              <li><span class="disc-guide__li-k">Vieni dallo sport</span><span class="disc-guide__li-d">Runner, atleti funzionali, ex sport di squadra.</span></li>
+              <li><span class="disc-guide__li-k">Parti da zero</span><span class="disc-guide__li-d">Non serve essere atleti — serve iniziare.</span></li>
+            </ul>
+          </div>
+          <div class="disc-guide__pane" data-guide-pane="2">
+            <p class="disc-guide__pane-intro">Le stazioni che incontri in gara e in sala.</p>
+            <ul class="disc-guide__list">
+              <li><span class="disc-guide__li-k">Corsa</span><span class="disc-guide__li-d">8 ripetute da 1 km, il filo conduttore della gara.</span></li>
+              <li><span class="disc-guide__li-k">Ergometri &amp; sled</span><span class="disc-guide__li-d">SkiErg, vogatore, sled push &amp; pull.</span></li>
+              <li><span class="disc-guide__li-k">Functional</span><span class="disc-guide__li-d">Burpee broad jump, farmers carry, sandbag lunge.</span></li>
+              <li><span class="disc-guide__li-k">Wall balls</span><span class="disc-guide__li-d">Più simulazioni di gara cronometrate.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <a class="btn btn--volt disc-guide__cta reveal" href="mailto:staff@arena97.it?subject=Prova%20Hyrox%20Arena97">Prova l'Hyrox</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- VIEW: Arena Fam -->
+  <div class="view" id="view-gente" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione Arena Fam → sostituisci photos/header/gente.jpg -->
+      <div class="view-hero__bg" id="vbGente" style="background-image:url('photos/header/gente.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">Arena Fam</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <div class="view-body view-body--light">
+      <div class="gente__top">
+        <h3 class="gente__title">Arena <span class="gente__title-outline">Fam</span></h3>
+        <p class="gente__copy">
+          Coach a parte, Arena97 è di chi la riempie ogni giorno: atleti,
+          soci, amici. Chi è passato dallo studio è finito sul muro —
+          e il muro continua a crescere.
+        </p>
+      </div>
+      <div class="gente__grid" id="genteGrid"></div>
+      <p class="gente__hint mono">Aggiungi scatti in <strong>photos/gente/</strong> (01.jpg, 02.jpg…) — il muro si costruisce da solo.</p>
+    </div>
+  </div>
+
+  <!-- VIEW: Personal Training -->
+  <div class="view view--disc" id="view-personal" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione Personal Training → sostituisci photos/header/personal.jpg -->
+      <div class="view-hero__bg" id="vbPersonal" style="background-image:url('photos/header/personal.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back aria-label="Torna alla home"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">Personal<br>Training</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <div class="disc-split">
+      <div class="disc-split__text reveal">
+        <div class="disc-split__eyebrow">
+          <span class="mono">07</span>
+          <span class="mono">One-to-one · Semi-privato</span>
+        </div>
+        <h2 class="disc-split__title">Personal<br>Training</h2>
+        <p class="disc-split__copy">
+          Un coach dedicato, un programma scritto su di te.
+          Nessun gruppo, nessun compromesso: ogni sessione
+          parte da dove sei e porta dove vuoi arrivare —
+          tecnica, forza, composizione corporea o preparazione gara.
+        </p>
+        <p class="disc-split__copy">
+          Disponibile in formato one-to-one o semi-privato (max 3 persone).
+          Il tuo coach costruisce il programma, traccia i progressi
+          e aggiusta il tiro ogni settimana.
+        </p>
+        <ul class="disc-split__feats">
+          <li>Sessioni one-to-one o semi-privato (max 3)</li>
+          <li>Assessment fisico e obiettivi iniziali</li>
+          <li>Programma personalizzato settimanale</li>
+          <li>Monitoraggio progressi e aggiornamenti</li>
+          <li>Accesso a tutte le discipline Arena97</li>
+        </ul>
+        <div class="disc-split__actions">
+          <a class="btn btn--volt" href="mailto:staff@arena97.it?subject=Personal%20Training%20Arena97">Prenota un colloquio</a>
+          <a class="btn btn--ghost" href="#" data-view="coach">Scegli il tuo coach <svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></a>
+        </div>
+      </div>
+      <div class="disc-split__photo reveal" id="dpPersonal">
+        <div class="disc-split__slide is-active" style="background-image:url('photos/personal/01.jpg')"></div>
+        <div class="disc-split__slide" style="background-image:url('photos/personal/02.jpg')"></div>
+        <div class="disc-split__slide" style="background-image:url('photos/personal/03.jpg')"></div>
+        <div class="disc-split__dots">
+          <span class="is-active"></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: L'Arena -->
+  <div class="view" id="view-arena" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione L'Arena → sostituisci photos/header/arena.jpg -->
+      <div class="view-hero__bg" id="vbArena" style="background-image:url('photos/header/arena.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">L'Arena</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <div class="view-body arena-body">
+      <div class="arena-dp">
+        <div class="arena-dp__text">
+          <h3 class="arena-dp__title">L'Arena</h3>
+          <p class="arena-dp__copy">
+            Niente set, niente pose: qui ci sono le sessioni vere. Sled che
+            grattano le corsie, bilancieri che cadono, classi che finiscono
+            con il fiato corto e la faccia soddisfatta. Questa è Arena97
+            un giorno qualsiasi.
+          </p>
+          <p class="arena-dp__copy">
+            Zona Hyrox con corsie sled e stazioni race, area CrossFit con rig
+            e bilancieri. Tutto allo
+            <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4786c6a88c20a46f:0x57cba59d25af5c0a?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">Scalo Porta Romana — Via Benaco 1, Milano</a>.
+          </p>
+        </div>
+        <div class="arena-dp__stage" id="arenaShow">
+          <div class="arena-dp__track" id="arenaSlides"></div>
+        </div>
+        <div class="arena-dp__bar" id="arenaDots"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: Prezzi -->
+  <div class="view" id="view-prezzi" hidden>
+    <div class="view-hero">
+      <!-- ✏️ MODIFICA: foto header sezione Prezzi → sostituisci photos/header/prezzi.jpg -->
+      <div class="view-hero__bg" style="background-image:url('photos/header/prezzi.jpg')"></div>
+      <div class="view-hero__veil"></div>
+      <button class="view-back" data-back><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+      <h2 class="view-hero__title">Prezzi</h2>
+      <span class="view-scroll-hint" aria-hidden="true">Scorri</span>
+    </div>
+    <div class="view-body">
+      <div class="pricing__top">
+        <h3 class="pricing__title">Scegli il tuo <span class="u-volt">programma</span></h3>
+        <p class="pricing__sub">Due discipline, un'unica sala. Nessuna quota d'iscrizione, disdici quando vuoi.</p>
+        <div class="pricing__billing" role="group" aria-label="Periodicità abbonamento">
+          <button class="pricing__bopt is-active" type="button" data-mode="mese">Mensile</button>
+          <button class="pricing__bopt" type="button" data-mode="tri">Trimestrale <span>−15%</span></button>
+        </div>
+      </div>
+
+      <div class="pricing__grid">
+        <article class="pcard pcard--featured">
+          <div class="pcard__head">
+            <div>
+              <h3 class="pcard__name">Hyrox</h3>
+              <p class="pcard__tag">Functional racing — preparati alla gara.</p>
+            </div>
+            <span class="pcard__badge pcard__badge--hot">Più scelto</span>
+          </div>
+          <div class="pcard__price">
+            <span class="pcard__cur">€</span><span class="pcard__amount" data-m="119">119</span><span class="pcard__per">/mese</span>
+          </div>
+          <p class="pcard__bill" data-bill>fatturato mensile</p>
+          <a class="btn btn--volt pcard__cta" href="mailto:staff@arena97.it?subject=Prova%20Hyrox">Prenota una prova</a>
+          <ul class="pcard__feats">
+            <li>Classi illimitate</li>
+            <li>Simulazioni di gara cronometrate</li>
+            <li>Programmazione race &amp; pacing</li>
+            <li>Open box negli orari liberi</li>
+            <li>Coach Hyrox dedicati</li>
+            <li>Accesso a CrossFit</li>
+          </ul>
+        </article>
+
+        <article class="pcard">
+          <div class="pcard__head">
+            <div>
+              <h3 class="pcard__name">CrossFit</h3>
+              <p class="pcard__tag">WOD &amp; forza — la community che spinge.</p>
+            </div>
+            <span class="pcard__badge">All round</span>
+          </div>
+          <div class="pcard__price">
+            <span class="pcard__cur">€</span><span class="pcard__amount" data-m="109">109</span><span class="pcard__per">/mese</span>
+          </div>
+          <p class="pcard__bill" data-bill>fatturato mensile</p>
+          <a class="btn btn--ghost pcard__cta" href="mailto:staff@arena97.it?subject=Prova%20CrossFit">Prenota una prova</a>
+          <ul class="pcard__feats">
+            <li>Classi illimitate</li>
+            <li>WOD quotidiani programmati</li>
+            <li>Sessioni di forza dedicate</li>
+            <li>Open box negli orari liberi</li>
+            <li>Scaling per ogni livello</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="pricing__note mono">Prima prova gratuita · Nessun vincolo · Studenti e under 25 −10%</p>
+    </div>
+  </div>
+
+  <!-- VIEW: Merch (griglia prodotti) -->
+  <div class="view view--merch" id="view-merch" hidden>
+    <button class="view-back view-back--merch" data-back aria-label="Torna alla home"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Arena97</button>
+    <div class="merch">
+      <div class="merch__head">
+        <span class="merch__collection mono" id="merchCollection">Arena97 Collection</span>
+      </div>
+      <div class="merch__grid" id="merchGrid"></div>
+    </div>
+  </div>
+
+  <!-- VIEW: Prodotto (pagina singola) -->
+  <div class="view view--product" id="view-product" hidden>
+    <button class="view-back view-back--merch" id="productBack" aria-label="Torna allo shop"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg> Shop</button>
+    <div class="product">
+      <div class="product__media" id="productMedia"></div>
+      <div class="product__panel">
+        <div class="product__panel-inner">
+          <h1 class="product__name" id="productName"></h1>
+          <span class="product__price" id="productPrice"></span>
+          <div class="product__desc" id="productDesc"></div>
+          <div class="product__selects">
+            <label class="product__select">
+              <span class="mono">Quantità</span>
+              <select id="productQty">
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+              </select>
+            </label>
+            <label class="product__select">
+              <span class="mono">Taglia</span>
+              <select id="productSize"></select>
+            </label>
+          </div>
+          <button class="product__add" id="productAdd">Aggiungi al carrello</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ LIGHTBOX ══════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto a schermo intero" hidden>
+    <button class="lightbox__close" id="lbClose" aria-label="Chiudi">✕</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lbPrev" aria-label="Foto precedente"><svg class="ico-arrow ico-arrow--left" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></button>
+    <figure class="lightbox__stage">
+      <div class="lightbox__media" id="lbMedia"></div>
+      <figcaption class="lightbox__meta">
+        <span class="lightbox__count mono" id="lbCount">01 / 01</span>
+        <h3 class="lightbox__name" id="lbName">—</h3>
+        <p class="lightbox__role mono" id="lbRole">—</p>
+        <div class="lightbox__tags" id="lbTags"></div>
+      </figcaption>
+    </figure>
+    <button class="lightbox__arrow lightbox__arrow--next" id="lbNext" aria-label="Foto successiva"><svg class="ico-arrow" viewBox="0 0 32 24" aria-hidden="true"><path d="M2 9 H17 V3.5 L30 12 L17 20.5 V15 H2 Z" fill="url(#dots)"/></svg></button>
+  </div>
+
+  <script type="module" src="js/main.js?v=46"></script>
+</body>
+</html>

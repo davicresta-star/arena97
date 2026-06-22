@@ -1,0 +1,19 @@
+# Foto originali non compresse (backup locale, non caricare su GitHub)
+photos/_originali/
+photos_full/
+
+# File di sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Editor e IDE
+.vscode/
+.idea/
+
+# Dati Claude Code (uso interno)
+.claude/

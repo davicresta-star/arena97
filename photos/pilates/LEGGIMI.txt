@@ -1,0 +1,16 @@
+CARTELLA: pilates/
+=====================================
+
+Foto della pagina disciplina PILATES (slideshow laterale). Consigliate 3 foto: 01.jpg, 02.jpg, 03.jpg. Se la cartella resta vuota, la pagina usa in automatico altre foto di ripiego.
+
+COME FUNZIONA
+- Metti qui foto in formato JPG, numerate a due cifre:
+  01.jpg, 02.jpg, 03.jpg ... (fino a 20)
+- Salva, ricarica la pagina del sito: le trova da solo.
+- Per SOSTITUIRE una foto: rimpiazza il file con lo stesso nome (es. 01.jpg).
+- Per AGGIUNGERE: usa il numero successivo libero.
+- Per TOGLIERE: cancella il file (gli altri si rinumerano da soli a video).
+
+FORMATO CONSIGLIATO: verticale 3:4 (es. 1200x1600 px)
+
+(Questo file LEGGIMI.txt viene ignorato dal sito, puoi lasciarlo.)

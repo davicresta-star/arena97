@@ -1,0 +1,16 @@
+CARTELLA: arena/
+=====================================
+
+Foto della sezione 'L'ARENA' — slideshow a SCHERMO INTERO. Le sessioni vere in sala. 01.jpg, 02.jpg, 03.jpg ...
+
+COME FUNZIONA
+- Metti qui foto in formato JPG, numerate a due cifre:
+  01.jpg, 02.jpg, 03.jpg ... (fino a 20)
+- Salva, ricarica la pagina del sito: le trova da solo.
+- Per SOSTITUIRE una foto: rimpiazza il file con lo stesso nome (es. 01.jpg).
+- Per AGGIUNGERE: usa il numero successivo libero.
+- Per TOGLIERE: cancella il file (gli altri si rinumerano da soli a video).
+
+FORMATO CONSIGLIATO: ORIZZONTALI 16:9 (es. 1920x1080 px) consigliate, per lo slideshow a schermo intero
+
+(Questo file LEGGIMI.txt viene ignorato dal sito, puoi lasciarlo.)

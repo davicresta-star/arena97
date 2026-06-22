@@ -1,0 +1,13 @@
+CARTELLA: merch/shorts/   →   prodotto "Tech Training Shorts"
+=====================================
+
+Metti qui le foto del capo, JPG numerate a due cifre:
+  01.jpg = foto principale (quella della griglia merch)
+  02.jpg, 03.jpg ... = foto extra che si vedono scrollando
+                       nella pagina del prodotto.
+
+FORMATO CONSIGLIATO: verticale/quadrato, sfondo chiaro e uniforme
+(stile studio), 1200x1500 px circa.
+
+Il prezzo, la descrizione e le taglie si modificano in js/data.js
+(sezione MERCH).

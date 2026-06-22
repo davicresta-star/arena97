@@ -1,0 +1,25 @@
+FOTO MENU HAMBURGER
+===================
+
+Queste foto compaiono quando l'utente passa il cursore
+sulle voci del menu hamburger (a sinistra o destra della voce).
+
+COME SOSTITUIRE UNA FOTO
+  1. Prepara la tua foto (formato JPG, dimensioni consigliate: 900×1200 px)
+  2. Rinominala esattamente come il file che vuoi sostituire
+  3. Copiala in questa cartella (sovrascrivendo quella vecchia)
+
+ELENCO FILE E A QUALE VOCE CORRISPONDONO
+  coach.jpg       → "I Coach"
+  discipline.jpg  → "Discipline" (titolo gruppo)
+  crossfit.jpg    → "CrossFit"
+  hyrox.jpg       → "Hyrox"
+  gente.jpg       → "Arena Fam"
+  arena.jpg       → "L'Arena"
+  personal.jpg    → "Personal Training"
+  merch.jpg       → "Merch"
+  prezzi.jpg      → "Prezzi"
+
+SUGGERIMENTO
+  Usa foto verticali (portrait) per un risultato migliore.
+  Dopo aver sostituito una foto, ricarica la pagina nel browser per vederla.
