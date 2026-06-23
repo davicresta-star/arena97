@@ -11,7 +11,7 @@ COME SOSTITUIRE UNA FOTO
 
 ELENCO FILE E A QUALE VOCE CORRISPONDONO
   coach.jpg       → "I Coach"
-  discipline.jpg  → "Discipline" (titolo gruppo)
+  classi.jpg      → "Classi" (titolo gruppo)
   crossfit.jpg    → "CrossFit"
   hyrox.jpg       → "Hyrox"
   gente.jpg       → "Arena Fam"

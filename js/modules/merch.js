@@ -1,6 +1,6 @@
 ﻿/* merch.js â€” griglia prodotti + pagina prodotto (stile DogPound) */
-import { MERCH, MERCH_COLLECTION } from "../data.js?v=46";
-import { pad, phHTML, PH_VARIANTS, discoverPhotos } from "./core.js?v=46";
+import { MERCH, MERCH_COLLECTION } from "../data.js?v=74";
+import { pad, phHTML, PH_VARIANTS, discoverPhotos } from "./core.js?v=74";
 
 const grid        = document.getElementById("merchGrid");
 const productView = document.getElementById("view-product");

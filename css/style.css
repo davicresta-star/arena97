@@ -913,7 +913,7 @@ body.menu-open .nav__side { opacity: 0; pointer-events: none; }
    MERCH — griglia prodotti + pagina prodotto (stile DogPound)
    ════════════════════════════════════════════════════════ */
 .view--merch { background: var(--black); min-height: 100vh; }
-.merch { padding: calc(var(--navh) + 3.5rem) var(--padx) var(--secy); }
+.merch { padding: calc(var(--navh) + 7rem) var(--padx) var(--secy); }
 .merch__head {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: 1rem; margin-bottom: 1.6rem;
@@ -1451,6 +1451,15 @@ select.field__input {
   filter: grayscale(1) contrast(1.28) brightness(0.58);
   animation: hero-pan 18s ease-out both;
 }
+/* Inquadratura header — la regola lo strumento sposta-immagini.bat
+   (0% = parte alta della foto, 50% = centro, 100% = parte bassa) */
+#vbCoach    { background-position: center 10%; }
+#vbCrossfit { background-position: center 50%; }
+#vbHyrox    { background-position: center 10%; }
+#vbGente    { background-position: center 15%; }
+#vbPersonal { background-position: center 30%; }
+#vbArena    { background-position: center 0%; }
+#vbPrezzi   { background-position: center 10%; }
 .view-hero__veil {
   position: absolute; inset: 0; z-index: 1;
   background:

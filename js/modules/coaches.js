@@ -1,6 +1,6 @@
 /* coaches.js — master-detail: sidebar thumbnails + pannello sempre visibile */
-import { COACHES, STAT_LABELS } from "../data.js?v=46";
-import { PH_VARIANTS, pad, phHTML, initialsOf } from "./core.js?v=46";
+import { COACHES, STAT_LABELS } from "../data.js?v=74";
+import { PH_VARIANTS, pad, phHTML, initialsOf } from "./core.js?v=74";
 
 const listEl  = document.getElementById("coachList");
 const panelEl = document.getElementById("coachPanel");
@@ -39,7 +39,7 @@ function renderPanel(coach, idx) {
   clearInterval(slideTimer);
 
   const name       = `${coach.firstName} ${coach.lastName}`;
-  const photos     = coach.photos.slice(0, 2);
+  const photos     = coach.photos; // tutte le foto della cartella (photos/<coach>/01.jpg, 02.jpg …)
   const statLabels = STAT_LABELS || {};
 
   const slidesHtml = photos.length

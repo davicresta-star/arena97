@@ -1,15 +1,15 @@
 ﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ARENA97 â€” Orchestratore (modulo ES)
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-import { COACHES, GENTE } from "./data.js?v=46";
-import { pad, phHTML, PH_VARIANTS, discoverPhotos } from "./modules/core.js?v=46";
-import { openLightbox } from "./modules/lightbox.js?v=46";
-import { observeReveals, initDragScroll, setMenu } from "./modules/ui.js?v=46";
-import { buildCoachStrip } from "./modules/coaches.js?v=46";
-import { initHero } from "./modules/hero.js?v=46";
-import { initPricing } from "./modules/pricing.js?v=46";
-import { buildMerchGrid } from "./modules/merch.js?v=46";
-import { initBooking } from "./modules/booking.js?v=46";
+import { COACHES, GENTE } from "./data.js?v=74";
+import { pad, phHTML, PH_VARIANTS, discoverPhotos, PHOTO_CB } from "./modules/core.js?v=74";
+import { openLightbox } from "./modules/lightbox.js?v=74";
+import { observeReveals, initDragScroll, setMenu } from "./modules/ui.js?v=74";
+import { buildCoachStrip } from "./modules/coaches.js?v=74";
+import { initHero } from "./modules/hero.js?v=74";
+import { initPricing } from "./modules/pricing.js?v=74";
+import { buildMerchGrid } from "./modules/merch.js?v=74";
+import { initBooking } from "./modules/booking.js?v=74";
 
 /* â”€â”€ Discipline split slideshows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DISC_VIEWS = ["view-crossfit", "view-hyrox", "view-personal"];
@@ -304,6 +304,22 @@ async function renderAll() {
   initDragScroll();
   observeReveals(document);
 }
+
+// Anti-cache per gli sfondi foto inseriti direttamente nell'HTML
+// (header sezioni, card discipline, foto contatti). Riscrive url('photos/…')
+// aggiungendo ?cb=… così le foto aggiornate compaiono al ricaricamento.
+function bustInlineBackgrounds() {
+  document.querySelectorAll('[style*="photos/"]').forEach(el => {
+    const s = el.getAttribute('style');
+    if (s && s.includes('url(') && !s.includes('cb=')) {
+      el.setAttribute('style', s.replace(
+        /url\((['"]?)([^'")]+?\.(?:jpg|jpeg|png|webp))\1\)/gi,
+        (_, q, u) => `url(${q}${u}?cb=${PHOTO_CB}${q})`
+      ));
+    }
+  });
+}
+bustInlineBackgrounds();
 
 // Navigazione da pannelli dinamici (es. coaches.js)
 document.addEventListener('arena:nav', e => showView(e.detail));

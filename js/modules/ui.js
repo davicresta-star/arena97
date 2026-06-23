@@ -17,9 +17,15 @@ let hoverTimer = null;
 let currentSrc = null;
 const HOVER_DELAY = 110; // ms di attesa prima di mostrare la foto
 
+// Anti-cache: valore fisso per ogni caricamento pagina. Così quando sostituisci
+// una foto del menu (stesso nome) e ricarichi, il browser scarica quella nuova
+// invece di riproporre la vecchia dalla memoria.
+const PHOTO_CB = Date.now();
+const bust = src => src + (src.includes("?") ? "&" : "?") + "cb=" + PHOTO_CB;
+
 function preloadMenuPhotos() {
   menu.querySelectorAll(".menu__links [data-photo]").forEach(a => {
-    if (a.dataset.photo) new Image().src = a.dataset.photo;
+    if (a.dataset.photo) new Image().src = bust(a.dataset.photo);
   });
 }
 
@@ -64,7 +70,7 @@ function showPhoto(src, side) {
   hidePhotoInstant();
 
   // 2) cambio sorgente e lato mentre Ã¨ invisibile
-  photoEl.src = src;
+  photoEl.src = bust(src);
   menuPhoto.classList.remove("menu__photo--left", "menu__photo--right");
   menuPhoto.classList.add(`menu__photo--${side}`);
 
