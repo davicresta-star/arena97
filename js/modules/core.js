@@ -1,13 +1,18 @@
 ﻿/* core.js â€” utilitÃ  condivise + scoperta foto */
-import { MAX_FOTO_PER_CARTELLA } from "../data.js?v=78";
+import { MAX_FOTO_PER_CARTELLA } from "../data.js?v=79";
 
 export const PH_VARIANTS = ["ph--1", "ph--2", "ph--3"];
 export const pad = n => String(n).padStart(2, "0");
 
-/* Anti-cache foto: valore fisso per ogni caricamento pagina. Quando sostituisci
-   una foto (stesso nome) e ricarichi, il browser scarica quella nuova invece di
-   riproporre la vecchia salvata in memoria. */
-export const PHOTO_CB = Date.now();
+/* Anti-cache foto legato alla VERSIONE del sito (il ?v=NN di questo file).
+   Così le foto vengono messe in cache dal browser (caricamento veloce) e
+   ricaricate solo quando cambia la versione — cioè quando modifichi il sito
+   o usi gli script (che alzano la versione). Molto più veloce di riscaricare
+   tutto ad ogni visita. */
+export const PHOTO_CB = (() => {
+  try { return new URL(import.meta.url).searchParams.get("v") || "1"; }
+  catch { return "1"; }
+})();
 export const bust = src => src ? src + (src.includes("?") ? "&" : "?") + "cb=" + PHOTO_CB : src;
 
 export function initialsOf(name) {

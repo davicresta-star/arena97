@@ -1,15 +1,15 @@
 ﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ARENA97 â€” Orchestratore (modulo ES)
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-import { COACHES, GENTE } from "./data.js?v=78";
-import { pad, phHTML, PH_VARIANTS, discoverPhotos, PHOTO_CB } from "./modules/core.js?v=78";
-import { openLightbox } from "./modules/lightbox.js?v=78";
-import { observeReveals, initDragScroll, setMenu } from "./modules/ui.js?v=78";
-import { buildCoachStrip } from "./modules/coaches.js?v=78";
-import { initHero } from "./modules/hero.js?v=78";
-import { initPricing } from "./modules/pricing.js?v=78";
-import { buildMerchGrid } from "./modules/merch.js?v=78";
-import { initBooking } from "./modules/booking.js?v=78";
+import { COACHES, GENTE } from "./data.js?v=79";
+import { pad, phHTML, PH_VARIANTS, discoverPhotos, PHOTO_CB } from "./modules/core.js?v=79";
+import { openLightbox } from "./modules/lightbox.js?v=79";
+import { observeReveals, initDragScroll, setMenu } from "./modules/ui.js?v=79";
+import { buildCoachStrip } from "./modules/coaches.js?v=79";
+import { initHero } from "./modules/hero.js?v=79";
+import { initPricing } from "./modules/pricing.js?v=79";
+import { buildMerchGrid } from "./modules/merch.js?v=79";
+import { initBooking } from "./modules/booking.js?v=79";
 
 /* â”€â”€ Discipline split slideshows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DISC_VIEWS = ["view-crossfit", "view-hyrox", "view-personal"];
@@ -256,6 +256,10 @@ function buildArenaShow(photos) {
 
 /* â”€â”€ Render principale â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 async function renderAll() {
+  // HERO PER PRIMO — è la prima cosa visibile in home, deve partire subito
+  const heroSlides = await discoverPhotos("hero");
+  if (heroSlides.length) initHero(heroSlides.slice(0, 6));
+
   // Coach: scopre le foto di ogni cartella
   const results = await Promise.all(COACHES.map(c => discoverPhotos(c.folder)));
   COACHES.forEach((c, i) => { c.photos = results[i]; });
@@ -292,11 +296,11 @@ async function renderAll() {
   const arenaPhotos = await discoverPhotos("arena");
   buildArenaShow(arenaPhotos);
 
-  // Hero slideshow
-  let heroSlides = await discoverPhotos("hero");
-  if (!heroSlides.length) heroSlides = arenaPhotos.slice();
-  if (!heroSlides.length) heroSlides = COACHES.map(c => c.photos[0]).filter(Boolean);
-  initHero(heroSlides.slice(0, 6));
+  // Hero: se la cartella hero era vuota, ripiega su arena/coach ora disponibili
+  if (!heroSlides.length) {
+    const fb = arenaPhotos.length ? arenaPhotos.slice() : COACHES.map(c => c.photos[0]).filter(Boolean);
+    if (fb.length) initHero(fb.slice(0, 6));
+  }
 
   // Merch
   await buildMerchGrid();

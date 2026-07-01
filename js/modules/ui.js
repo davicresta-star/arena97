@@ -17,10 +17,12 @@ let hoverTimer = null;
 let currentSrc = null;
 const HOVER_DELAY = 110; // ms di attesa prima di mostrare la foto
 
-// Anti-cache: valore fisso per ogni caricamento pagina. Così quando sostituisci
-// una foto del menu (stesso nome) e ricarichi, il browser scarica quella nuova
-// invece di riproporre la vecchia dalla memoria.
-const PHOTO_CB = Date.now();
+// Anti-cache legato alla versione del sito (il ?v=NN di questo file): le foto
+// del menu vengono messe in cache e ricaricate solo quando cambia la versione.
+const PHOTO_CB = (() => {
+  try { return new URL(import.meta.url).searchParams.get("v") || "1"; }
+  catch { return "1"; }
+})();
 const bust = src => src + (src.includes("?") ? "&" : "?") + "cb=" + PHOTO_CB;
 
 function preloadMenuPhotos() {

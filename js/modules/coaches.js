@@ -1,6 +1,6 @@
 /* coaches.js — master-detail: sidebar thumbnails + pannello sempre visibile */
-import { COACHES, STAT_LABELS } from "../data.js?v=78";
-import { PH_VARIANTS, pad, phHTML, initialsOf } from "./core.js?v=78";
+import { COACHES, STAT_LABELS } from "../data.js?v=79";
+import { PH_VARIANTS, pad, phHTML, initialsOf } from "./core.js?v=79";
 
 const listEl  = document.getElementById("coachList");
 const panelEl = document.getElementById("coachPanel");
