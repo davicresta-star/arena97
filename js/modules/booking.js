@@ -1,5 +1,5 @@
 ﻿/* booking.js â€” form prenotazione prova (vanilla, invio via email) */
-import { openCalendar } from "./calendar.js?v=74";
+import { openCalendar } from "./calendar.js?v=78";
 
 const EMAIL_DEST = "staff@arena97.it";
 

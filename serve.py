@@ -2,9 +2,12 @@
 """Dev server per Arena97 — disabilita la cache così le modifiche ai moduli
 JS/CSS si vedono subito senza bisogno di cache-busting manuale (?v=)."""
 import http.server
+import os
 import socketserver
 
-PORT = 4097
+# Usa la porta assegnata dall'ambiente (preview Claude), altrimenti 4097
+# quando lo lanci tu a mano.
+PORT = int(os.environ.get("PORT", 4097))
 
 
 class NoCacheHandler(http.server.SimpleHTTPRequestHandler):

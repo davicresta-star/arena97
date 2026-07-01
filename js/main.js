@@ -1,15 +1,15 @@
 ﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ARENA97 â€” Orchestratore (modulo ES)
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-import { COACHES, GENTE } from "./data.js?v=74";
-import { pad, phHTML, PH_VARIANTS, discoverPhotos, PHOTO_CB } from "./modules/core.js?v=74";
-import { openLightbox } from "./modules/lightbox.js?v=74";
-import { observeReveals, initDragScroll, setMenu } from "./modules/ui.js?v=74";
-import { buildCoachStrip } from "./modules/coaches.js?v=74";
-import { initHero } from "./modules/hero.js?v=74";
-import { initPricing } from "./modules/pricing.js?v=74";
-import { buildMerchGrid } from "./modules/merch.js?v=74";
-import { initBooking } from "./modules/booking.js?v=74";
+import { COACHES, GENTE } from "./data.js?v=78";
+import { pad, phHTML, PH_VARIANTS, discoverPhotos, PHOTO_CB } from "./modules/core.js?v=78";
+import { openLightbox } from "./modules/lightbox.js?v=78";
+import { observeReveals, initDragScroll, setMenu } from "./modules/ui.js?v=78";
+import { buildCoachStrip } from "./modules/coaches.js?v=78";
+import { initHero } from "./modules/hero.js?v=78";
+import { initPricing } from "./modules/pricing.js?v=78";
+import { buildMerchGrid } from "./modules/merch.js?v=78";
+import { initBooking } from "./modules/booking.js?v=78";
 
 /* â”€â”€ Discipline split slideshows â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DISC_VIEWS = ["view-crossfit", "view-hyrox", "view-personal"];

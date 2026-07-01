@@ -1,5 +1,5 @@
 ﻿/* lightbox.js â€” visualizzatore foto a schermo intero */
-import { pad, phHTML } from "./core.js?v=74";
+import { pad, phHTML } from "./core.js?v=78";
 
 const lightbox = document.getElementById("lightbox");
 const lbMedia = document.getElementById("lbMedia");
