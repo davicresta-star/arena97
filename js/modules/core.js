@@ -1,5 +1,5 @@
 ﻿/* core.js â€” utilitÃ  condivise + scoperta foto */
-import { MAX_FOTO_PER_CARTELLA } from "../data.js?v=79";
+import { MAX_FOTO_PER_CARTELLA } from "../data.js?v=80";
 
 export const PH_VARIANTS = ["ph--1", "ph--2", "ph--3"];
 export const pad = n => String(n).padStart(2, "0");

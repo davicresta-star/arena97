@@ -1301,6 +1301,10 @@ select.field__input {
   .nav__side { display: none; }
   .nav__logo { grid-column: 2; }
   .nav__burger { grid-column: 3; }
+  /* Mobile menu: parole perfettamente centrate (via i numerini + lo spaziatore) */
+  .menu__links > a, .menu__group-title { gap: 0; text-align: center; }
+  .menu__links > a::after, .menu__group-title::after { content: none; }
+  .menu__num { display: none; }
   .hyrox__grid, .manifesto__grid, .founders__grid, .cselect, .gente__top { grid-template-columns: 1fr; }
   .disc-split { grid-template-columns: 1fr; grid-template-rows: 55vh auto; }
   .disc-split__photo { order: -1; min-height: 55vh; }
